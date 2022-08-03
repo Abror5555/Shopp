@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<style>
+    .product-all{
+        padding-left: 500px;
+    }
+</style>
+
+
+<div class="product-all">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'base' %}">Bosh oyna</a></li>
+            <li class="breadcrumb-item"><a href="#">{{ product.category.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{ product.image.url }}" alt="" class="img-fluid">
+        </div>
+        <div class="col-md-8">
+            <h4><strong>{{ product.title }}</strong></h4>
+            <p><strong>Narhi:</strong> ${{ product.price }}</p>
+            <p><strong>To'liq ma'lumot:</strong>  {{ product.description }}</p>
+
+        </div>
+        <p class="mt-4"><strong>Ma'lumot: </strong></p>
+
+        {% if product.category.slug == 'notebooks' %}
+            {% include 'notebook_secifications.html' %}
+        {% else %}
+            {% include 'smartphone_secifications.html' %}
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock content %}
